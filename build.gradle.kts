@@ -33,6 +33,10 @@ dependencies {
 	
 	// HTMX for dynamic page interactions
 	implementation("org.webjars.npm:htmx.org:1.9.12")
+	
+	// BootUI - Developer console for Spring Boot
+	developmentOnly("com.julien-dubois.bootui:bootui-spring-boot-starter:1.18.0")
+	
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	runtimeOnly("org.postgresql:postgresql")
