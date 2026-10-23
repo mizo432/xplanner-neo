@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <title>Projects Fragment</title>
+</head>
+<body>
+<div th:fragment="projects-list">
+    <div th:if="${projects != null and !projects.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th th:text="#{objects.tableheading.actions}">Actions</th>
+                    <th th:text="#{objects.tableheading.id}">ID</th>
+                    <th th:text="#{projects.tableheading.name}">Name</th>
+                    <th th:text="#{projects.tableheading.iteration}">Iteration</th>
+                    <th th:text="#{projects.tableheading.ishidden}">Hidden</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="project : ${projects}" th:classappend="${project.hidden} ? 'hidden'">
+                    <td>
+                        <a th:href="@{/projects/{id}/edit(id=${project.id})}" class="image edit" th:title="#{action.edit.project}">Edit</a>
+                        <button 
+                            th:attr="hx-delete=@{/projects/{id}/delete(id=${project.id})}, 
+                                   hx-target='#projects-list',
+                                   hx-swap='outerHTML'
+                            "
+                            class="image delete" 
+                            th:title="#{action.delete.project}"
+                        >Delete</button>
+                    </td>
+                    <td>
+                        <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/projects/{id}(id=${project.id})}" class="name" th:text="${project.name}">Project Name</a>
+                    </td>
+                    <td>
+                        <span th:if="${project.currentIteration != null}">
+                            <a th:href="@{/iterations/{id}(id=${project.currentIteration.id})}" 
+                               th:text="${project.currentIteration.name}">Iteration</a>
+                        </span>
+                    </td>
+                    <td style="text-align: center">
+                        <span th:if="${project.hidden}" th:text="#{ishidden.yes}">Yes</span>
+                        <span th:unless="${project.hidden}" th:text="#{ishidden.no}">No</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${projects == null or projects.empty}">
+        <span class="highlighted_message" th:text="#{projects.none}">No projects found.</span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="ja">
+<head>
+    <title>Search Results Fragment</title>
+</head>
+<body>
+<div th:fragment="search-results">
+    <div th:if="${results != null and !results.isEmpty()}">
+        <ul>
+            <li th:each="result : ${results}">
+                <span th:text="${result}"></span>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${results == null or results.isEmpty()}">
+        <p>No results found.</p>
+    </div>
+</div>
+</body>
+</html>

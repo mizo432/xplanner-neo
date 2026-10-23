@@ -29,6 +29,17 @@ public class TaskController extends AbstractController {
 
     @GetMapping
     public String listTasks(@RequestParam(required = false) Integer iterationId, @RequestParam(required = false) Integer personId, Model model) {
+        populateTaskModel(iterationId, personId, model);
+        return "view/tasks";
+    }
+
+    @GetMapping("/list-fragment")
+    public String listTasksFragment(@RequestParam(required = false) Integer iterationId, @RequestParam(required = false) Integer personId, Model model) {
+        populateTaskModel(iterationId, personId, model);
+        return "view/tasks-fragment";
+    }
+
+    private void populateTaskModel(Integer iterationId, Integer personId, Model model) {
         if (iterationId != null) {
             TypedQuery<Task> query = entityManager.createQuery(
                 "SELECT t FROM Task t WHERE t.iteration.id = :iterationId ORDER BY t.name", Task.class);
@@ -44,7 +55,6 @@ public class TaskController extends AbstractController {
         } else {
             model.addAttribute("tasks", new java.util.ArrayList<>());
         }
-        return "view/tasks";
     }
 
     @GetMapping("/{id}")

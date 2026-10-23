@@ -62,4 +62,10 @@ public class ProjectController extends AbstractController {
         }
         return "redirect:/projects";
     }
+
+    @GetMapping("/list-fragment")
+    public String listProjectsFragment(Model model) {
+        model.addAttribute("projects", projectService.selectAllProjects(null));
+        return "view/projects-fragment";
+    }
 }

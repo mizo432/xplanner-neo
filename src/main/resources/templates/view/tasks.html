@@ -12,41 +12,12 @@
         <h1>Tasks</h1>
     </span>
 
-    <div th:if="${tasks != null and !tasks.empty}">
-        <table class="objecttable">
-            <thead>
-                <tr>
-                    <th>Actions</th>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Assignee</th>
-                    <th>Estimate</th>
-                    <th>Remaining</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="task : ${tasks}">
-                    <td>
-                        <a th:href="@{/tasks/{id}/edit(id=${task.id})}" class="image edit">Edit</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.id}">1</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.name}">Task Name</a>
-                    </td>
-                    <td th:text="${task.assignedTo != null ? task.assignedTo.name : 'Unassigned'}">Assignee</td>
-                    <td th:text="${task.estimate}">Estimate</td>
-                    <td th:text="${task.remaining}">Remaining</td>
-                    <td th:text="${task.status}">Status</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div th:if="${tasks == null or tasks.empty}">
-        <span class="highlighted_message">No tasks found.</span>
+    <div id="tasks-list" 
+         th:attr="hx-get=@{/tasks/list-fragment(iterationId=${iterationId},personId=${personId})}"
+         hx-trigger="load"
+         hx-swap="innerHTML"
+         hx-target="this">
+        <!-- HTMX will load the tasks list here -->
     </div>
 
     <div class="links">

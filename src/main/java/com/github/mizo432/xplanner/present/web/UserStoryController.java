@@ -30,6 +30,13 @@ public class UserStoryController extends AbstractController {
         return "view/stories";
     }
 
+    @GetMapping("/list-fragment")
+    public String listStoriesFragment(@RequestParam Long iterationId, Model model) {
+        model.addAttribute("stories", userStoryService.selectAllUserStories(iterationId));
+        model.addAttribute("iterationId", iterationId);
+        return "view/stories-fragment";
+    }
+
     @GetMapping("/{id}")
     public String viewStory(@PathVariable Long id, Model model) {
         UserStory story = userStoryService.findById(id);

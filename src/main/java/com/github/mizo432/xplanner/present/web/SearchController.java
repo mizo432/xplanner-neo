@@ -43,7 +43,21 @@ public class SearchController extends AbstractController {
     private PersonRepository personRepository;
 
     @GetMapping
-    public String search(@RequestParam String q, @RequestParam(required = false) Long projectId, Model model) {
+    public String search(@RequestParam(required = false) String q, @RequestParam(required = false) Long projectId, Model model) {
+        if (q == null || q.isEmpty()) {
+            model.addAttribute("results", new ArrayList<>());
+            model.addAttribute("query", "");
+            return "view/search";
+        }
+        return searchResults(q, projectId, model);
+    }
+
+    @GetMapping("/results-fragment")
+    public String searchFragment(@RequestParam String q, @RequestParam(required = false) Long projectId, Model model) {
+        return searchResults(q, projectId, model);
+    }
+
+    private String searchResults(String q, Long projectId, Model model) {
         List<Object> results = new ArrayList<>();
         String pattern = "%" + q + "%";
 
@@ -74,6 +88,6 @@ public class SearchController extends AbstractController {
 
         model.addAttribute("results", results);
         model.addAttribute("query", q);
-        return "view/search";
+        return "view/search-results-fragment";
     }
 }

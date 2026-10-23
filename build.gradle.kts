@@ -30,6 +30,9 @@ dependencies {
 
 	// Bootstrap 5 via WebJars
 	implementation("org.webjars:bootstrap:5.3.8")
+	
+	// HTMX for dynamic page interactions
+	implementation("org.webjars.npm:htmx.org:1.9.12")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	runtimeOnly("org.postgresql:postgresql")

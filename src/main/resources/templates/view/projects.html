@@ -12,46 +12,12 @@
         <h1 th:text="#{projects.title}">Projects</h1>
     </span>
 
-    <div th:if="${projects != null and !projects.empty}">
-        <table class="objecttable">
-            <thead>
-                <tr>
-                    <th th:text="#{objects.tableheading.actions}">Actions</th>
-                    <th th:text="#{objects.tableheading.id}">ID</th>
-                    <th th:text="#{projects.tableheading.name}">Name</th>
-                    <th th:text="#{projects.tableheading.iteration}">Iteration</th>
-                    <th th:text="#{projects.tableheading.ishidden}">Hidden</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="project : ${projects}" th:classappend="${project.hidden} ? 'hidden'">
-                    <td>
-                        <a th:href="@{/projects/{id}/edit(id=${project.id})}" class="image edit" th:title="#{action.edit.project}">Edit</a>
-                        <a th:href="@{/projects/{id}(id=${project.id})}" class="image delete" th:title="#{action.delete.project}">Delete</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/projects/{id}(id=${project.id})}" th:text="${project.id}">1</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/projects/{id}(id=${project.id})}" class="name" th:text="${project.name}">Project Name</a>
-                    </td>
-                    <td>
-                        <span th:if="${project.currentIteration != null}">
-                            <a th:href="@{/iterations/{id}(id=${project.currentIteration.id})}" 
-                               th:text="${project.currentIteration.name}">Iteration</a>
-                        </span>
-                    </td>
-                    <td style="text-align: center">
-                        <span th:if="${project.hidden}" th:text="#{ishidden.yes}">Yes</span>
-                        <span th:unless="${project.hidden}" th:text="#{ishidden.no}">No</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div th:if="${projects == null or projects.empty}">
-        <span class="highlighted_message" th:text="#{projects.none}">No projects found.</span>
+    <div id="projects-list" 
+         hx-get="/projects/list-fragment" 
+         hx-trigger="load"
+         hx-swap="innerHTML"
+         hx-target="this">
+        <!-- HTMX will load the projects list here -->
     </div>
 
     <div class="links">

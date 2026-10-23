@@ -13,19 +13,32 @@
     </span>
 
     <form th:action="@{/search}" method="get">
-        <input type="text" name="q" th:value="${query}" placeholder="Search..."/>
+        <input 
+            type="text" 
+            name="q" 
+            th:value="${query}" 
+            placeholder="Search..."
+            id="search-query"
+            hx-get="@{/search/results-fragment}"
+            hx-trigger="changed delay:500ms"
+            hx-target="#search-results"
+            hx-indicator="#search-indicator"
+        />
         <button type="submit">Search</button>
+        <span id="search-indicator" class="htmx-indicator">Loading...</span>
     </form>
 
-    <div th:if="${results != null and !results.isEmpty()}">
-        <ul>
-            <li th:each="result : ${results}">
-                <span th:text="${result}"></span>
-            </li>
-        </ul>
-    </div>
-    <div th:unless="${results != null and !results.isEmpty()}">
-        <p>No results found.</p>
+    <div id="search-results">
+        <div th:if="${results != null and !results.isEmpty()}">
+            <ul>
+                <li th:each="result : ${results}">
+                    <span th:text="${result}"></span>
+                </li>
+            </ul>
+        </div>
+        <div th:if="${results == null or results.isEmpty()}">
+            <p>No results found.</p>
+        </div>
     </div>
 </div>
 </body>
