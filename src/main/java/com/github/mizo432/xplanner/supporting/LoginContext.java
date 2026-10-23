@@ -16,8 +16,12 @@ import org.slf4j.LoggerFactory;
 import com.github.mizo432.xplanner.supporting.module.ConfigurationException;
 import com.github.mizo432.xplanner.supporting.module.LoginModuleLoader;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class LoginContext implements Serializable
 {
+   private static final long serialVersionUID = 1L;
    protected static final Logger LOG = LoggerFactory.getLogger(LoginContext.class);
 
    private transient LoginModule[] loginModules;
@@ -81,6 +85,7 @@ public class LoginContext implements Serializable
     }
 
    // DEBT: The deserialization creating new LoginModule should be cleaned up when we have a bean context per session/request...
+   @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(value = "MC_OVERRIDABLE_METHOD_CALL_IN_READ_OBJECT", justification = "getLoginModules() is safe to call in readObject for this use case")
     private final void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException, ConfigurationException {
        in.defaultReadObject();
        loginModules = getLoginModules();

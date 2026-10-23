@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 /**
@@ -34,6 +36,7 @@ import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 @Entity
 @Table(name = "datasample")
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 public class DataSample implements java.io.Serializable, Identifiable {
 	public static final String SAMPLE_TIME="id.sampleTime";
     public static final String REFERENCE_ID="id.referenceId";

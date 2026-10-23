@@ -27,8 +27,11 @@ import com.github.mizo432.xplanner.buisiness.model.Feature;
 import com.github.mizo432.xplanner.buisiness.model.Integration;
 import com.github.mizo432.xplanner.supporting.AuthenticationException;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 
 @Component
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class AuthorizerImpl implements Authorizer {
    private final Map<Class<?>, String> resourceTypes = new HashMap<>();
    public static final Long ANY_PROJECT = 0L;
@@ -140,9 +143,9 @@ public class AuthorizerImpl implements Authorizer {
 
    public String getTypeOfResource(Object resource) {
 	   String keyClass = resource.getClass().getName();
-	   for (Class<?> clazz : resourceTypes.keySet()) {
-		   	if (keyClass.startsWith(clazz.getName())) {
-	    			return resourceTypes.get(clazz);
+	   for (Map.Entry<Class<?>, String> entry : resourceTypes.entrySet()) {
+		   	if (keyClass.startsWith(entry.getKey().getName())) {
+	    			return entry.getValue();
 	    		}
    		}
 	   return null;
@@ -174,7 +177,7 @@ public class AuthorizerImpl implements Authorizer {
       if (permissionsForProject != null) {
          for (Permission permission : permissionsForProject) {
             if (isMatching(permission.getResourceType(), resourceType) &&
-                (permission.getResourceId() == 0 || permission.getResourceId() == resourceId)) {
+                (permission.getResourceId() == null || permission.getResourceId() == 0L || permission.getResourceId().equals(resourceId))) {
                if (isMatching(permission.getName(), permissionName)) {
                   if (permission.isPositive()) {
                      hasPositivePermission = true;

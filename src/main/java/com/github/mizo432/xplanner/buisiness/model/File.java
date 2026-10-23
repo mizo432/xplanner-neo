@@ -9,6 +9,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
 *    XplannerPlus, agile planning software
 *    @author Maksym_Chyrkov. 
@@ -30,6 +32,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "xfile")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "SE_BAD_FIELD", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; Blob field is managed by JPA; getters return mutable objects, acceptable for JPA")
 public class File extends DomainObject implements java.io.Serializable {
 	private static final long serialVersionUID = -7604190182077162703L;
 	private String name;

@@ -17,6 +17,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.TimeEntry.CollectionUtils;
 import java.util.function.ToDoubleFunction;
 
@@ -41,6 +43,7 @@ import java.util.function.ToDoubleFunction;
 
 @Entity
 @Table(name = "story")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Deprecated method usage warnings and unchecked operations for Task metrics")
 @SuppressWarnings({"deprecation", "unchecked"})
 public class UserStory extends NamedObject implements java.io.Serializable,

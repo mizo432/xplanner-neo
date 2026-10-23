@@ -23,7 +23,10 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.EntityManager;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 @Component
+@SuppressFBWarnings(value = {"MS_EXPOSE_REP", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Singleton pattern returns instance, acceptable for this use case; getters return mutable objects, acceptable for this use case")
 public class DomainMetaDataRepository {
    private static final Logger log = LoggerFactory.getLogger(DomainMetaDataRepository.class);
 
@@ -154,9 +157,9 @@ public class DomainMetaDataRepository {
 		DomainClass dom = metadataByClass.get(objectClass);
 		if (dom == null) {
 			String className = objectClass.getName();
-			for (Class<?> clazz : metadataByClass.keySet()) {
-				if (className.startsWith(clazz.getName())) {
-					return metadataByClass.get(clazz);
+			for (Map.Entry<Class<?>, DomainClass> entry : metadataByClass.entrySet()) {
+				if (className.startsWith(entry.getKey().getName())) {
+					return entry.getValue();
 				}
 			}
 		}

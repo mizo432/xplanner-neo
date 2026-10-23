@@ -23,6 +23,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 /**
@@ -31,6 +33,7 @@ import com.github.mizo432.xplanner.buisiness.model.Identifiable;
  */
 @Entity
 @Table(name="object_type")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class ObjectType extends DomainObject implements Identifiable {
     private static final long serialVersionUID = 1L;
 

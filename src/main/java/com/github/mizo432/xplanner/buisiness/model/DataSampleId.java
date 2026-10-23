@@ -6,7 +6,10 @@ import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 @Embeddable
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 public class DataSampleId implements Serializable {
 	private static final long serialVersionUID = -5204295414444697497L;
 	private Date sampleTime;

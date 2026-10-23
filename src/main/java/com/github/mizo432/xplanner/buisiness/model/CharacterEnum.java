@@ -48,7 +48,7 @@ public abstract class CharacterEnum implements Serializable {
    }
 
    //See http://www.javaworld.com/javaworld/javatips/jw-javatip122.html for the reason of this method
-   private Object readResolve () throws InvalidObjectException {
+   protected Object readResolve () throws InvalidObjectException {
       CharacterEnum[] enums = listEnums();
       for (int i = 0; i < enums.length; i++) {
          if (enums[i].getName().equals(getName())) return enums[i];

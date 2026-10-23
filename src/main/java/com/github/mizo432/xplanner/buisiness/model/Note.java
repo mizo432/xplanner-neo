@@ -13,6 +13,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.mizo432.xplanner.buisiness.model.Nameable;
@@ -39,6 +41,7 @@ import com.github.mizo432.xplanner.buisiness.model.repository.NoteRepository;
 
 @Entity
 @Table(name = "note")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Temporal deprecation warnings until migration to java.time")
 @SuppressWarnings("deprecation")
 public class Note extends DomainObject implements java.io.Serializable, Nameable {

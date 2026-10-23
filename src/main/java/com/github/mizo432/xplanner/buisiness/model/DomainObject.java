@@ -16,9 +16,12 @@ import jakarta.persistence.Transient;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 @MappedSuperclass
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Temporal deprecation warnings until migration to java.time")
 @SuppressWarnings("deprecation")
 public class DomainObject implements Identifiable {

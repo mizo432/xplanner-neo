@@ -13,8 +13,11 @@ import com.github.mizo432.xplanner.buisiness.model.UserStory;
 import com.github.mizo432.xplanner.supporting.AuthenticationException;
 import com.github.mizo432.xplanner.supporting.auth.Authorizer;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 //TODO Should be turn into a Query object
 //TODO Create a spring context including IterationRepository and others for every web session (logged in user)
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class IterationRepository {
     public static final String EDITABLE_ITERATIONS_QUERY_STRING =
             "select i from " + Iteration.class.getName() + " i, " + Project.class.getName() + " p " +

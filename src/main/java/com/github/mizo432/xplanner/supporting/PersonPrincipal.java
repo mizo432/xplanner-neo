@@ -5,6 +5,9 @@ import java.security.Principal;
 
 import com.github.mizo432.xplanner.buisiness.model.Person;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class PersonPrincipal implements Principal, Serializable {
     private Person person;
 

@@ -5,6 +5,8 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlTransient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Iteration;
 import com.github.mizo432.xplanner.buisiness.model.NamedObject;
 import com.github.mizo432.xplanner.buisiness.model.Note;
@@ -14,6 +16,7 @@ import com.github.mizo432.xplanner.buisiness.model.Person;
 //@Loader(namedQuery="project.loadView")
 //@NamedQuery(name="project.loadView", query="select project.id as id,project.name as name from project in class com.github.mizo432.xplanner.buisiness.model.Project where project.id=?")
 @XmlRootElement
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class ProjectView extends NamedObject{
 	private Boolean hidden;
     private List<Person> notificationReceivers;

@@ -14,6 +14,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 /**
@@ -37,6 +39,7 @@ import com.github.mizo432.xplanner.buisiness.model.Identifiable;
 
 @Entity
 @Table(name = "history")
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Temporal deprecation warnings until migration to java.time")
 @SuppressWarnings("deprecation")
 public class History implements Identifiable, Serializable {

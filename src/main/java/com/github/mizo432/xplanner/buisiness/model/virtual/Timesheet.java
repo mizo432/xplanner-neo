@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class Timesheet implements Serializable {
 
     private List<TimesheetEntry> entries = new ArrayList<>();

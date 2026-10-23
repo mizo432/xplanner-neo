@@ -7,7 +7,7 @@ public enum IterationStatus {
     public static final String ACTIVE_KEY = "active";
     public static final String INACTIVE_KEY = "inactive";
 
-    public static final String[] KEYS = {ACTIVE_KEY, INACTIVE_KEY};
+    static final String[] KEYS = {ACTIVE_KEY, INACTIVE_KEY};
 
     private IterationStatus(short code){
         this.code = code;

@@ -3,6 +3,9 @@ package com.github.mizo432.xplanner.buisiness.model;
 import com.github.mizo432.xplanner.buisiness.model.DomainObject;
 import com.github.mizo432.xplanner.buisiness.model.UserStory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class Feature extends DomainObject {
     private String name;
     private String description;

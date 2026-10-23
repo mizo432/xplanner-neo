@@ -55,6 +55,9 @@ dependencies {
 	testCompileOnly("org.projectlombok:lombok:1.18.48")
 	testAnnotationProcessor("org.projectlombok:lombok:1.18.48")
 
+	// SpotBugs annotations
+	compileOnly("com.github.spotbugs:spotbugs-annotations:4.10.2")
+
 	// Test dependencies
  testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
@@ -120,6 +123,11 @@ tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
 	reports.create("html") {
 		required.set(true)
 	}
+	// Suppress US_USELESS_SUPPRESSION_ON_CLASS warnings
+	// These occur when @SuppressFBWarnings is applied to classes where the actual bug pattern
+	// is in generated code (Lombok) or inherited methods, making the suppression technically "useless"
+	// but still necessary for the actual bugs
+	excludeFilter.set(file("spotbugs-exclude.xml"))
 }
 
 // Node.js and npm configuration (removed - no longer needed for Materialize CSS)

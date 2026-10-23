@@ -7,6 +7,7 @@ package com.github.mizo432.xplanner.constant;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -68,9 +69,8 @@ public class XPlannerProperties {
             InputStream in = XPlannerProperties.class.getClassLoader().getResourceAsStream(customPropertyFileName);
             if (in != null) {
                customProperties.load(in);
-               for (Iterator<Object> iterator = customProperties.keySet().iterator(); iterator.hasNext();) {
-                  Object key = iterator.next();
-                  properties.put(key, customProperties.get(key));
+               for (Map.Entry<Object, Object> entry : customProperties.entrySet()) {
+                  properties.put(entry.getKey(), entry.getValue());
                }
             }
          } catch (IOException ex) {

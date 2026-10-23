@@ -2,6 +2,7 @@ package com.github.mizo432.xplanner.buisiness.model;
 
 import java.text.MessageFormat;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,6 +11,7 @@ import java.text.MessageFormat;
  * Time: 11:16:08 AM
  * To change this template use File | Settings | File Templates.
  */
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class TaskDisposition extends CharacterEnum {
 
    boolean original;
@@ -39,7 +41,7 @@ public class TaskDisposition extends CharacterEnum {
                                                                           OVERHEAD_NAME,
                                                                           false);
 
-   public static final TaskDisposition[] enums = {PLANNED, CARRIED_OVER, ADDED, DISCOVERED, OVERHEAD};
+   static final TaskDisposition[] enums = {PLANNED, CARRIED_OVER, ADDED, DISCOVERED, OVERHEAD};
 
    TaskDisposition(char code, String name, boolean original) {
       super(code, name);

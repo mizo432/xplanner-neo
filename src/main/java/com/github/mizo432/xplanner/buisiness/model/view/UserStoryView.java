@@ -6,12 +6,15 @@ import java.util.List;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.NamedObject;
 
 import com.github.mizo432.xplanner.buisiness.model.StoryDisposition;
 import com.github.mizo432.xplanner.buisiness.model.StoryStatus;
 
 @XmlRootElement
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class UserStoryView extends NamedObject {
 	private double estimatedHours;
 	private int priority;

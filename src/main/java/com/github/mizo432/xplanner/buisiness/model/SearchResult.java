@@ -33,7 +33,7 @@ public class SearchResult extends Object
 
         final SearchResult searchResult = (SearchResult) o;
 
-        if (getDomainObjectId() != searchResult.getDomainObjectId()) return false;
+        if (!java.util.Objects.equals(getDomainObjectId(), searchResult.getDomainObjectId())) return false;
 
         return true;
     }

@@ -4,6 +4,9 @@ import java.util.Date;
 
 import com.github.mizo432.xplanner.buisiness.model.DomainObject;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class Integration extends DomainObject {
     public static final char PENDING = 'P';
     public static final char ACTIVE = 'A';

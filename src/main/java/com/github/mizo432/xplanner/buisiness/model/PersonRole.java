@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
 *    XplannerPlus, agile planning software
 *    @author Maksym_Chyrkov. 
@@ -30,6 +32,7 @@ import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "person_role")
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 public class PersonRole implements java.io.Serializable {
 	private static final long serialVersionUID = 4005621505117736352L;
 	private PersonRoleId id;
@@ -70,7 +73,7 @@ public class PersonRole implements java.io.Serializable {
 	
 	@Transient
 	public int getProjectId() {
-		return this.getProjectId();
+		return id.getProjectId();
 	}
 
 }

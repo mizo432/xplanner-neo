@@ -8,6 +8,8 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
 *    XplannerPlus, agile planning software
 *    @author Maksym_Chyrkov. 
@@ -29,6 +31,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "notification_receivers")
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for JPA")
 public class NotificationReceivers implements java.io.Serializable {
 	private static final long serialVersionUID = -4537343448751435206L;
 	private NotificationReceiversId id;

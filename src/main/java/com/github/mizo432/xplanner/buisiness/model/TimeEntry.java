@@ -12,6 +12,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.constant.XPlannerProperties;
 import java.util.function.ToDoubleFunction;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -37,6 +39,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 
 @Entity
 @Table(name = "time_entry")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Temporal deprecation warnings until migration to java.time")
 @SuppressWarnings("deprecation")
 public class TimeEntry extends DomainObject implements java.io.Serializable, Nameable {

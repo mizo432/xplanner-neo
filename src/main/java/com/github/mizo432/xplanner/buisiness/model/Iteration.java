@@ -21,6 +21,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.TimeEntry.CollectionUtils;
 import com.github.mizo432.xplanner.buisiness.model.TimeEntry.CollectionUtils.DoublePropertyFilter;
 
@@ -46,6 +48,7 @@ import com.github.mizo432.xplanner.buisiness.model.TimeEntry.CollectionUtils.Dou
 
 @Entity
 @Table(name = "iteration")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 @jakarta.annotation.Generated(value = "Junie", comments = "Suppressing @Temporal deprecation warnings and unchecked operations until migration to java.time and generics")
 @SuppressWarnings({"deprecation", "unchecked"})
 public class Iteration extends NamedObject implements java.io.Serializable, NoteAttachable {

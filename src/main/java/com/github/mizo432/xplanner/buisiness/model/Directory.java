@@ -9,6 +9,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
 *    XplannerPlus, agile planning software
 *    @author Maksym_Chyrkov. 
@@ -30,6 +32,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "xdir")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class Directory extends DomainObject implements java.io.Serializable {
 	private static final long serialVersionUID = -1957144606982414797L;
 	private String name;

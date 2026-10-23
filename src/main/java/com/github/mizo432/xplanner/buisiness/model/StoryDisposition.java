@@ -2,6 +2,9 @@ package com.github.mizo432.xplanner.buisiness.model;
 
 import java.text.MessageFormat;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class StoryDisposition extends CharacterEnum{
 
 
@@ -18,7 +21,7 @@ public class StoryDisposition extends CharacterEnum{
    public static final StoryDisposition CARRIED_OVER = new StoryDisposition('c', CARRIED_OVER_NAME);
    public static final StoryDisposition ADDED = new StoryDisposition('a', ADDED_NAME);
 
-   public static final StoryDisposition[] enums = {PLANNED, CARRIED_OVER, ADDED};
+   static final StoryDisposition[] enums = {PLANNED, CARRIED_OVER, ADDED};
 
    public String getNameKey() {
       return MessageFormat.format(NAME_KEY_TEMPLATE, (Object)name);

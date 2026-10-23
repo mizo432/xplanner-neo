@@ -21,6 +21,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.NoteAttachable;
 
 /**
@@ -44,6 +46,7 @@ import com.github.mizo432.xplanner.buisiness.model.NoteAttachable;
 
 @Entity
 @Table(name = "project")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 @XmlRootElement
 public class Project extends NamedObject implements java.io.Serializable, NoteAttachable {
 	private static final long serialVersionUID = -6137321799143662647L;

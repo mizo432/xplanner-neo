@@ -3,9 +3,12 @@ package com.github.mizo432.xplanner.supporting;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * This exception should be used when a user's identity can't be verified.
  */
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class AuthenticationException extends Exception {
    private Map<String, String> errorByModule = new HashMap<>();
 

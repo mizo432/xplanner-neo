@@ -2,7 +2,11 @@ package com.github.mizo432.xplanner.buisiness.model;
 
 import java.text.MessageFormat;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class StoryStatus extends CharacterEnum {
+   private static final long serialVersionUID = 1L;
 
    public static final String DRAFT_NAME = "draft";
    public static final String DEFINED_NAME = "defined";

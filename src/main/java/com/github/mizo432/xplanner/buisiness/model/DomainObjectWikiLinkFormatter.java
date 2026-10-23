@@ -15,9 +15,6 @@ import com.github.mizo432.xplanner.buisiness.model.Task;
 import com.github.mizo432.xplanner.buisiness.model.UserStory;
 
 public class DomainObjectWikiLinkFormatter {
-   String fromText;
-   String toText;
-
    Map<Class<? extends DomainObject>, String> schemeByClass = new HashMap<>();
 
    public DomainObjectWikiLinkFormatter() {

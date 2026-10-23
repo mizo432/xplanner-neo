@@ -20,12 +20,15 @@ package com.github.mizo432.xplanner.buisiness.model;
 
 import jakarta.persistence.*;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.enums.SettingScope;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="object_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name="setting")
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class Setting extends NamedObject{
 	private String category;
 	private String defaultValue;

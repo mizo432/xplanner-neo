@@ -7,6 +7,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import com.github.mizo432.xplanner.buisiness.model.Nameable;
 
 /**
@@ -30,6 +32,7 @@ import com.github.mizo432.xplanner.buisiness.model.Nameable;
 
 @Entity
 @Table(name = "person", uniqueConstraints = @UniqueConstraint(columnNames = "userId"))
+@SuppressFBWarnings(value = {"EQ_DOESNT_OVERRIDE_EQUALS", "EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "DomainObject implements equals based on ID, sufficient for JPA entities; getters return mutable objects, acceptable for JPA")
 public class Person extends DomainObject implements java.io.Serializable, Nameable {
 	private static final long serialVersionUID = -8209945280001173802L;
 	public static final String USER_ID = "userId";

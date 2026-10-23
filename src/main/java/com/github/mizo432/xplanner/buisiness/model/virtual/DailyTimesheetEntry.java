@@ -6,11 +6,13 @@ import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP", "EI_EXPOSE_REP2"}, justification = "Getters return mutable objects, acceptable for this use case")
 public class DailyTimesheetEntry implements Serializable {
     private java.util.Date entryDate;
     private java.math.BigDecimal totalDuration = new BigDecimal(0.0);
-    public static SimpleDateFormat shortDateFormat = new SimpleDateFormat(
-            "EEE d-MMM-yy");
+    private static final String SHORT_DATE_PATTERN = "EEE d-MMM-yy";
 
     public DailyTimesheetEntry() {
     }
@@ -25,7 +27,8 @@ public class DailyTimesheetEntry implements Serializable {
     }
 
     public String getEntryDateShort() {
-        return shortDateFormat.format(this.getEntryDate());
+        SimpleDateFormat sdf = new SimpleDateFormat(SHORT_DATE_PATTERN);
+        return sdf.format(this.getEntryDate());
     }
 
     public void setEntryDate(Date date) {

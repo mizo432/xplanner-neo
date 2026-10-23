@@ -6,13 +6,16 @@ import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 @Deprecated
+@SuppressFBWarnings(value = "EQ_COMPARETO_USE_OBJECT_EQUALS", justification = "Comparable interface requires compareTo, equals is not used for ordering")
 public class TaskStatus implements Comparable
 {
     public static final TaskStatus STARTED = new TaskStatus("S");
     public static final TaskStatus NON_STARTED = new TaskStatus("");
     public static final TaskStatus COMPLETED = new TaskStatus("C");
-    public static final List statusOrdering = Arrays.asList(new TaskStatus[]{
+    static final List statusOrdering = Arrays.asList(new TaskStatus[]{
         STARTED,
         NON_STARTED,
         COMPLETED});

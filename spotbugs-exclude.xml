@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Suppress US_USELESS_SUPPRESSION_ON_CLASS warnings -->
+    <!-- These occur when @SuppressFBWarnings is applied to classes where the actual bug pattern -->
+    <!-- is in generated code (Lombok) or inherited methods, making the suppression technically "useless" -->
+    <!-- but still necessary for the actual bugs -->
+    <Match>
+        <Bug code="US" />
+    </Match>
+</FindBugsFilter>
