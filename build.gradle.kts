@@ -3,6 +3,7 @@ plugins {
 	id("org.springframework.boot") version "4.1.1"
 	id("io.spring.dependency-management") version "1.1.7"
 	id("jacoco")
+	id("com.github.spotbugs") version "6.5.12"
 }
 
 group = "com.github.mizo432"
@@ -104,6 +105,21 @@ sourceSets {
 tasks.withType<JavaCompile> {
 	options.encoding = "UTF-8"
 	options.compilerArgs.add("-Xlint:deprecation")
+}
+
+// SpotBugs configuration
+spotbugs {
+	toolVersion.set("4.10.2")
+	ignoreFailures.set(false)
+}
+
+tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
+	reports.create("xml") {
+		required.set(true)
+	}
+	reports.create("html") {
+		required.set(true)
+	}
 }
 
 // Node.js and npm configuration (removed - no longer needed for Materialize CSS)
