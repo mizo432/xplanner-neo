@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">People</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>People</h1>
+    </span>
+
+    <div th:if="${people != null and !people.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person : ${people}">
+                    <td>
+                        <a th:href="@{/people/{id}/edit(id=${person.id})}" class="image edit">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/people/{id}(id=${person.id})}" th:text="${person.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/people/{id}(id=${person.id})}" th:text="${person.name}">Person Name</a>
+                    </td>
+                    <td th:text="${person.email}">Email</td>
+                    <td th:text="${person.role}">Role</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${people == null or people.empty}">
+        <span class="highlighted_message">No people found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/people/edit}">Add Person</a>
+        <a th:href="@{/projects}">Back to Projects</a>
+    </div>
+</div>
+</body>
+</html>

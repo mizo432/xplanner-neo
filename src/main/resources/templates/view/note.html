@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Note</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:text="${note.subject}">Note Subject</h1>
+    </span>
+
+    <div class="note-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${note.id}">1</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td th:text="${note.subject}">Subject</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td th:text="${note.body}">Body</td>
+            </tr>
+            <tr>
+                <th>Author</th>
+                <td th:text="${note.authorId}">Author</td>
+            </tr>
+            <tr>
+                <th>Submission Time</th>
+                <td th:text="${note.submissionTime}">Submission Time</td>
+            </tr>
+            <tr th:if="${note.file != null}">
+                <th>Attachment</th>
+                <td>
+                    <a th:href="@{/files/{id}(id=${note.file.id})}" 
+                       th:text="${note.file.name}">Attachment</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/notes/{id}/edit(id=${note.id})}">Edit Note</a>
+        <a th:href="@{/notes(attachedToId=${note.attachedToId})}">Back to Notes</a>
+    </div>
+</div>
+</body>
+</html>

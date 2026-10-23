@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  threads:
+    virtual:
+      enabled: true
+
+  messages:
+    encoding: UTF-8
+    cache-duration: 0
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: XPlannerPool
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+      connection-test-query: SELECT 1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    enabled: false
+
+  thymeleaf:
+    encoding: UTF-8
+    cache: false
+    mode: HTML
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 600000
+
+  mvc:
+    view:
+      prefix: /templates/
+      suffix: .html

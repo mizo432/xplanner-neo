@@ -1,0 +1,9 @@
+{
+  "name": "xplanner-neo",
+  "version": "1.0.0",
+  "description": "XPlanner Neo frontend dependencies",
+  "private": true,
+  "dependencies": {
+    "@materializecss/materialize": "^2.1.1"
+  }
+}

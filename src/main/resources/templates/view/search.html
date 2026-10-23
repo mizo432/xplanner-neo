@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Search Results</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Search Results</h1>
+    </span>
+
+    <form th:action="@{/search}" method="get">
+        <input type="text" name="q" th:value="${query}" placeholder="Search..."/>
+        <button type="submit">Search</button>
+    </form>
+
+    <div th:if="${results != null and !results.isEmpty()}">
+        <ul>
+            <li th:each="result : ${results}">
+                <span th:text="${result}"></span>
+            </li>
+        </ul>
+    </div>
+    <div th:unless="${results != null and !results.isEmpty()}">
+        <p>No results found.</p>
+    </div>
+</div>
+</body>
+</html>

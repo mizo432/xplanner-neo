@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Time Entry</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Time Entry</h1>
+    </span>
+
+    <div class="timeentry-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${timeEntry.id}">1</td>
+            </tr>
+            <tr>
+                <th>Task</th>
+                <td>
+                    <a th:if="${timeEntry.task != null}" 
+                       th:href="@{/tasks/{id}(id=${timeEntry.task.id})}" 
+                       th:text="${timeEntry.task.name}">Task Name</a>
+                    <span th:unless="${timeEntry.task != null}">-</span>
+                </td>
+            </tr>
+            <tr>
+                <th>Start Time</th>
+                <td th:text="${timeEntry.startTime}">Start Time</td>
+            </tr>
+            <tr>
+                <th>End Time</th>
+                <td th:text="${timeEntry.endTime}">End Time</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td th:text="${timeEntry.duration}">Duration</td>
+            </tr>
+            <tr>
+                <th>Report Date</th>
+                <td th:text="${timeEntry.reportDate}">Report Date</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td th:text="${timeEntry.description}">Description</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/timeentries/{id}/edit(id=${timeEntry.id})}">Edit Time Entry</a>
+        <a th:if="${timeEntry.task != null}" th:href="@{/tasks/{id}(id=${timeEntry.task.id})}">Back to Task</a>
+    </div>
+</div>
+</body>
+</html>

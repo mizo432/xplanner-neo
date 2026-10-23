@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Stories</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Stories</h1>
+    </span>
+
+    <div th:if="${stories != null and !stories.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Priority</th>
+                    <th>Estimate</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="story : ${stories}">
+                    <td>
+                        <a th:href="@{/stories/{id}/edit(id=${story.id})}" class="image edit">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/stories/{id}(id=${story.id})}" th:text="${story.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/stories/{id}(id=${story.id})}" th:text="${story.name}">Story Name</a>
+                    </td>
+                    <td th:text="${story.priority}">Priority</td>
+                    <td th:text="${story.estimate}">Estimate</td>
+                    <td th:text="${story.status}">Status</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${stories == null or stories.empty}">
+        <span class="highlighted_message">No stories found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/stories/edit(iterationId=${iterationId})}">Add Story</a>
+        <a th:href="@{/iterations/{id}(id=${iterationId})}">Back to Iteration</a>
+    </div>
+</div>
+</body>
+</html>

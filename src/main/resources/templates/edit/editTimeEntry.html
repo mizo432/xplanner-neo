@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Edit Time Entry</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:if="${timeEntry.id != null and timeEntry.id > 0}">Edit Time Entry</h1>
+        <h1 th:unless="${timeEntry.id != null and timeEntry.id > 0}">Add Time Entry</h1>
+    </span>
+
+    <form th:action="${timeEntry.id != null and timeEntry.id > 0} ? @{/timeentries/{id}(id=${timeEntry.id})} : @{/timeentries}" 
+          th:object="${timeEntry}" 
+          method="post">
+        <input type="hidden" th:field="*{id}"/>
+        
+        <table class="objecttable">
+            <tr>
+                <th><label for="task">Task</label></th>
+                <td>
+                    <select id="task" th:field="*{task.id}">
+                        <option value="">Select Task</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="startTime">Start Time</label></th>
+                <td><input type="datetime-local" id="startTime" th:field="*{startTime}"/></td>
+            </tr>
+            <tr>
+                <th><label for="endTime">End Time</label></th>
+                <td><input type="datetime-local" id="endTime" th:field="*{endTime}"/></td>
+            </tr>
+            <tr>
+                <th><label for="reportDate">Report Date</label></th>
+                <td><input type="date" id="reportDate" th:field="*{reportDate}"/></td>
+            </tr>
+            <tr>
+                <th><label for="person1Id">Person 1</label></th>
+                <td><input type="number" id="person1Id" th:field="*{person1Id}"/></td>
+            </tr>
+            <tr>
+                <th><label for="person2Id">Person 2</label></th>
+                <td><input type="number" id="person2Id" th:field="*{person2Id}"/></td>
+            </tr>
+            <tr>
+                <th><label for="description">Description</label></th>
+                <td><textarea id="description" th:field="*{description}"></textarea></td>
+            </tr>
+        </table>
+
+        <div class="links">
+            <button type="submit">Save</button>
+            <a th:href="@{/timeentries}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

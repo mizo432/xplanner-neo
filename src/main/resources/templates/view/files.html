@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Files</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Files</h1>
+    </span>
+
+    <div th:if="${files != null and !files.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Content Type</th>
+                    <th>File Size</th>
+                    <th>Directory</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="file : ${files}">
+                    <td>
+                        <a th:href="@{/files/{id}(id=${file.id})}" th:text="${file.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/files/{id}(id=${file.id})}" th:text="${file.name}">File Name</a>
+                    </td>
+                    <td th:text="${file.contentType}">Content Type</td>
+                    <td th:text="${file.fileSize}">File Size</td>
+                    <td th:text="${file.directory != null} ? ${file.directory.name} : '-'">Directory</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${files == null or files.empty}">
+        <span class="highlighted_message">No files found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/files}">Back to Files</a>
+    </div>
+</div>
+</body>
+</html>

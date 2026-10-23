@@ -1,0 +1,21 @@
+/* Main CSS - imports base styles and works with Materialize CSS */
+@import url('base.css');
+
+/* Materialize CSS overrides and custom styles */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#content {
+    flex: 1 0 auto;
+}
+
+#header {
+    flex: 0 0 auto;
+}
+
+#footer {
+    flex: 0 0 auto;
+}

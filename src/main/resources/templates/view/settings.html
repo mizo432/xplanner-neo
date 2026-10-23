@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Settings</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Settings</h1>
+    </span>
+
+    <div th:if="${settings != null and !settings.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Default Value</th>
+                    <th>Scope</th>
+                    <th>Object Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="setting : ${settings}">
+                    <td th:text="${setting.id}">1</td>
+                    <td th:text="${setting.name}">Name</td>
+                    <td th:text="${setting.category}">Category</td>
+                    <td th:text="${setting.defaultValue}">Default Value</td>
+                    <td th:text="${setting.scope}">Scope</td>
+                    <td th:text="${setting.objectType != null} ? ${setting.objectType.name} : '-'">Object Type</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${settings == null or settings.empty}">
+        <span class="highlighted_message">No settings found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/settings}">Back to Settings</a>
+    </div>
+</div>
+</body>
+</html>

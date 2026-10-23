@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Project</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:text="${project.name}">Project Name</h1>
+    </span>
+
+    <div class="project-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${project.id}">1</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td th:text="${project.name}">Project Name</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td th:text="${project.description}">Description</td>
+            </tr>
+            <tr>
+                <th>Hidden</th>
+                <td th:text="${project.hidden} ? 'Yes' : 'No'">No</td>
+            </tr>
+        </table>
+    </div>
+
+    <div th:if="${project.currentIteration != null}" class="current-iteration">
+        <h2>Current Iteration</h2>
+        <a th:href="@{/iterations/{id}(id=${project.currentIteration.id})}" 
+           th:text="${project.currentIteration.name}">Iteration Name</a>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/projects/{id}/edit(id=${project.id})}">Edit Project</a>
+        <a th:href="@{/projects}">Back to Projects</a>
+        <a th:href="@{/iterations?projectId={id}(id=${project.id})}">Iterations</a>
+        <a th:href="@{/stories?projectId={id}(id=${project.id})}">Stories</a>
+        <a th:href="@{/tasks?projectId={id}(id=${project.id})}">Tasks</a>
+    </div>
+</div>
+</body>
+</html>

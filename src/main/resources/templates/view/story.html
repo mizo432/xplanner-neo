@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Story</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:text="${story.name}">Story Name</h1>
+    </span>
+
+    <div class="story-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${story.id}">1</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td th:text="${story.name}">Story Name</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td th:text="${story.description}">Description</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td th:text="${story.priority}">Priority</td>
+            </tr>
+            <tr>
+                <th>Estimate</th>
+                <td th:text="${story.estimate}">Estimate</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td th:text="${story.status}">Status</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/stories/{id}/edit(id=${story.id})}">Edit Story</a>
+        <a th:href="@{/stories(iterationId=${story.iteration.id})}">Back to Stories</a>
+    </div>
+</div>
+</body>
+</html>

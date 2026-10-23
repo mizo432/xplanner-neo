@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Time Entries</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Time Entries</h1>
+    </span>
+
+    <div th:if="${timeEntries != null and !timeEntries.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>ID</th>
+                    <th>Task</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration</th>
+                    <th>Report Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="timeEntry : ${timeEntries}">
+                    <td>
+                        <a th:href="@{/timeentries/{id}/edit(id=${timeEntry.id})}" class="image edit">Edit</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/timeentries/{id}(id=${timeEntry.id})}" th:text="${timeEntry.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:if="${timeEntry.task != null}" 
+                           th:href="@{/tasks/{id}(id=${timeEntry.task.id})}" 
+                           th:text="${timeEntry.task.name}">Task Name</a>
+                        <span th:unless="${timeEntry.task != null}">-</span>
+                    </td>
+                    <td th:text="${timeEntry.startTime}">Start Time</td>
+                    <td th:text="${timeEntry.endTime}">End Time</td>
+                    <td th:text="${timeEntry.duration}">Duration</td>
+                    <td th:text="${timeEntry.reportDate}">Report Date</td>
+                    <td th:text="${timeEntry.description}">Description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${timeEntries == null or timeEntries.empty}">
+        <span class="highlighted_message">No time entries found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/timeentries/edit(taskId=${taskId})}">Add Time Entry</a>
+        <a th:if="${taskId != null}" th:href="@{/tasks/{id}(id=${taskId})}">Back to Task</a>
+        <a th:if="${personId != null}" th:href="@{/people/{id}(id=${personId})}">Back to Person</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Task</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:text="${task.name}">Task Name</h1>
+    </span>
+
+    <div class="task-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${task.id}">1</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td th:text="${task.name}">Task Name</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td th:text="${task.description}">Description</td>
+            </tr>
+            <tr>
+                <th>Assignee</th>
+                <td th:text="${task.assignedTo != null ? task.assignedTo.name : 'Unassigned'}">Assignee</td>
+            </tr>
+            <tr>
+                <th>Estimate</th>
+                <td th:text="${task.estimate}">Estimate</td>
+            </tr>
+            <tr>
+                <th>Remaining</th>
+                <td th:text="${task.remaining}">Remaining</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td th:text="${task.status}">Status</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit Task</a>
+        <a th:if="${task.iteration != null}" th:href="@{/tasks(iterationId=${task.iteration.id})}">Back to Tasks</a>
+    </div>
+</div>
+</body>
+</html>

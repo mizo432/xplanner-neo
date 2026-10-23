@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Person</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:text="${person.name}">Person Name</h1>
+    </span>
+
+    <div class="person-details">
+        <table class="objecttable">
+            <tr>
+                <th>ID</th>
+                <td th:text="${person.id}">1</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td th:text="${person.name}">Person Name</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${person.email}">Email</td>
+            </tr>
+            <tr>
+                <th>Role</th>
+                <td th:text="${person.role}">Role</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/people/{id}/edit(id=${person.id})}">Edit Person</a>
+        <a th:href="@{/people}">Back to People</a>
+        <a th:href="@{/tasks(personId=${person.id})}">Tasks</a>
+    </div>
+</div>
+</body>
+</html>

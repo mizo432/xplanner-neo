@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Edit Task</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:if="${task.id != null and task.id > 0}">Edit Task</h1>
+        <h1 th:unless="${task.id != null and task.id > 0}">Add Task</h1>
+    </span>
+
+    <form th:action="${task.id != null and task.id > 0} ? @{/tasks/{id}(id=${task.id})} : @{/tasks}" 
+          th:object="${task}" 
+          method="post">
+        <input type="hidden" th:field="*{id}"/>
+        
+        <table class="objecttable">
+            <tr>
+                <th><label for="name">Name</label></th>
+                <td><input type="text" id="name" th:field="*{name}" required/></td>
+            </tr>
+            <tr>
+                <th><label for="description">Description</label></th>
+                <td><textarea id="description" th:field="*{description}"></textarea></td>
+            </tr>
+            <tr>
+                <th><label for="estimate">Estimate</label></th>
+                <td><input type="number" id="estimate" th:field="*{estimate}"/></td>
+            </tr>
+            <tr>
+                <th><label for="remaining">Remaining</label></th>
+                <td><input type="number" id="remaining" th:field="*{remaining}"/></td>
+            </tr>
+            <tr>
+                <th><label for="status">Status</label></th>
+                <td>
+                    <select id="status" th:field="*{status}">
+                        <option value="unstarted">Unstarted</option>
+                        <option value="inprogress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <div class="links">
+            <button type="submit">Save</button>
+            <a th:href="@{/tasks(iterationId=${iterationId})}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Roles</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1>Roles</h1>
+    </span>
+
+    <div th:if="${roles != null and !roles.empty}">
+        <table class="objecttable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Left</th>
+                    <th>Right</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="role : ${roles}">
+                    <td>
+                        <a th:href="@{/roles/{id}(id=${role.id})}" th:text="${role.id}">1</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/roles/{id}(id=${role.id})}" th:text="${role.name}">Role Name</a>
+                    </td>
+                    <td th:text="${role.left}">Left</td>
+                    <td th:text="${role.right}">Right</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:if="${roles == null or roles.empty}">
+        <span class="highlighted_message">No roles found.</span>
+    </div>
+
+    <div class="links">
+        <a th:href="@{/roles}">Back to Roles</a>
+    </div>
+</div>
+</body>
+</html>

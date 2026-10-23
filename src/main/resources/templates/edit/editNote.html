@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}"
+      lang="ja">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Edit Note</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <span class="title">
+        <h1 th:if="${note.id != null and note.id > 0}">Edit Note</h1>
+        <h1 th:unless="${note.id != null and note.id > 0}">Add Note</h1>
+    </span>
+
+    <form th:action="${note.id != null and note.id > 0} ? @{/notes/{id}(id=${note.id})} : @{/notes}" 
+          th:object="${note}" 
+          method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{attachedToId}"/>
+        
+        <table class="objecttable">
+            <tr>
+                <th><label for="subject">Subject</label></th>
+                <td><input type="text" id="subject" th:field="*{subject}" required/></td>
+            </tr>
+            <tr>
+                <th><label for="body">Body</label></th>
+                <td><textarea id="body" th:field="*{body}" rows="10" cols="50"></textarea></td>
+            </tr>
+            <tr>
+                <th><label for="authorId">Author ID</label></th>
+                <td><input type="number" id="authorId" th:field="*{authorId}"/></td>
+            </tr>
+        </table>
+
+        <div class="links">
+            <button type="submit">Save</button>
+            <a th:href="@{/notes(attachedToId=${note.attachedToId})}">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

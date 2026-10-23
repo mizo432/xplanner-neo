@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Header Fragment</title></head>
+<body>
+<div th:fragment="header" id="xplanner-header">
+    <div class="header-container">
+        <a th:href="@{/projects}" class="logo">XPlanner Neo</a>
+        <nav id="main-nav">
+            <a th:href="@{/projects}" th:text="#{nav.projects}">Projects</a>
+            <a th:href="@{/dashboard}" th:text="#{nav.dashboard}">Dashboard</a>
+            <a th:href="@{/timesheets}" th:text="#{nav.timesheets}">Timesheets</a>
+        </nav>
+        <div class="user-menu">
+            <span th:if="${session.userId != null}">
+                <a th:href="@{/people}" th:text="${session.person?.name}">User</a>
+                <a th:href="@{/logout}" th:text="#{nav.logout}">Logout</a>
+            </span>
+            <span th:unless="${session.userId != null}">
+                <a th:href="@{/login}" th:text="#{nav.login}">Login</a>
+            </span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
